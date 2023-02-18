@@ -258,15 +258,85 @@ SELECT * FROM clients WHERE firstName LIKE '[ABC]%';
 SELECT * FROM clients WHERE firstName NOT LIKE '_o%';
 ```
 
-### Сортировка и фильтрация
+### Сортировка данных
+
+Получить все элементы таблицы отсортированные по столбцу `firstName` в порядке возрастания:
+
+```sql
+SELECT * FROM clients ORDER BY firstName ASC;
+```
+
+Получить все элементы таблицы отсортированные по столбцу `age` в порядке убывания:
+
+```sql
+SELECT * FROM clients ORDER BY age DESC;
+```
+
+Получить все элементы таблицы отсортированные по столбцу `lastName` в порядке убывания, а затем по столбцу `id` в порядке возрастания:
+
+```sql
+SELECT * FROM clients ORDER BY lastName DESC, id ASC;
+```
 
 ### Изменение данных
 
+Изменить значение столбца `phone` у элемента со значением столбца `id` равным 42:
+
+```sql
+UPDATE clients SET phone = '+123987654' WHERE id = 42;
+```
+
+Изменить значения столбцов `city` и `age` у элементов со значениеми столбцов `gender` = "female" и `name` = "Sophia":
+
+```sql
+UPDATE clients SET city = 'Paris', age = 33 WHERE gender = 'famale' AND name = "Sophia";
+```
+
 ### Удаление данных
+
+Удалить элемент из таблицы, где значение столбца `id` = 1:
+
+```sql
+DELETE FROM clients WHERE id = 137;
+```
+
+Удалить элементы из таблицы, где значения столбцов `city` = "Prague" и `age` = 22:
+
+```sql
+DELETE FROM clients WHERE city = 'Prague' AND age = 22;
+```
 
 ### Псевдонимы
 
+```sql
+SELECT firstName AS fn FROM clients WHERE fn = "Alex";
+```
+
 ### Изменение таблиц
+
+Добавить новый столбец `city` в таблицу `clients`:
+
+```sql
+ALTER TABLE clients ADD COLUMN city VARCHAR(50);
+```
+
+Удалить столбец `isMarried` из таблицы `clients`:
+
+```sql
+ALTER TABLE clients DROP COLUMN isMarried;
+```
+
+Переименовать столбец `firstName` в `fName` в таблицe `clients`:
+
+```sql
+ALTER TABLE clients RENAME COLUMN firstName TO fName;
+```
+
+Переименовать таблицу `clients` в `users`
+
+```sql
+ALTER TABLE clients RENAME TO users;
+```
 
 ### Агрегатные функции
 
