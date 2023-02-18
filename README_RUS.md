@@ -208,6 +208,12 @@ SELECT * FROM clients WHERE age = 25 AND isMarried = false;
 SELECT * FROM clients WHERE firstName = 'Alex' OR lastName = 'Smith';
 ```
 
+Получить все элементы таблицы, где столбец `firstName` может иметь одно из перечисленных значений: "John", "Mike", "Kane":
+
+```sql
+SELECT * FROM clients WHERE firstName IN ('John', 'Mike', 'Kane');
+```
+
 Получить все элементы, где значения столбца `age` находятся в диапазоне от 20 до 30:
 
 ```sql
@@ -226,7 +232,31 @@ SELECT * FROM clients WHERE phone IS NOT NULL;
 SELECT DISTINCT(lastName) FROM clients;
 ```
 
-### Поиск данных
+### Поиск данных по шаблону
+
+Для поиска данных по шаблонам используются операторы `LIKE` и `NOT LIKE`.
+В самих шаблонах использются специальные подстановочные знаки:
+
+-   `%` – подстановочный знак, который указывает, что на его месте может быть любое кол-во символов.
+-   `_` – подстановочный знак, который указывает, что на его месте может быть только один символ.
+
+Получить все элементы таблицы, где значение столбца `firstName` начинается с символа "A":
+
+```sql
+SELECT * FROM clients WHERE firstName LIKE 'A%';
+```
+
+Получить все элементы таблицы, где значение столбца `firstName` начинается с одного из перечисленных символов: "A", "B", "C":
+
+```sql
+SELECT * FROM clients WHERE firstName LIKE '[ABC]%';
+```
+
+Получить все элементы таблицы, где 2-ой символ в значении столбца `firstName` не равен символу "o":
+
+```sql
+SELECT * FROM clients WHERE firstName NOT LIKE '_o%';
+```
 
 ### Сортировка и фильтрация
 
