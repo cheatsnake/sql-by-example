@@ -341,3 +341,31 @@ ALTER TABLE clients RENAME TO users;
 ### Агрегатные функции
 
 Агрегатные (_aggregate – совокупный_) функции используются для обобщения/подсчета данных.
+
+Подсчитать общее количество элементов в таблице:
+
+```sql
+SELECT COUNT(*) FROM clients;
+```
+
+Получить максимальное/минимальное значение столбца `age`:
+
+```sql
+SELECT MAX(age) FROM clients;
+```
+
+```sql
+SELECT MIN(age) FROM clients;
+```
+
+Подсчитать общую сумму всех элементов столбца `age`:
+
+```sql
+SELECT SUM(age) FROM clients;
+```
+
+Подсчитать среднее значение элементов столбца `age`:
+
+```sql
+SELECT AVG(age) FROM clients;
+```
