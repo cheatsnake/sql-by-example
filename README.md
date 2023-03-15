@@ -25,6 +25,7 @@ SQL (Structured Query Language) is a special query language for working with rel
     -   [Aliases](#aliases)
     -   [Editing tables](#editing-tables)
     -   [Aggregate functions](#aggregate-functions)
+    -   [Grouping](#grouping)
 
 ## Basics of SQL
 
@@ -331,7 +332,17 @@ DELETE FROM clients WHERE city = 'Prague' AND age = 22;
 ### Aliases
 
 ```sql
-SELECT firstName AS fn FROM clients WHERE fn = "Alex";
+SELECT first_name AS name, last_name AS surname FROM clients;
+```
+
+```sh
+    name     | surname
+-------------+----------
+ Fowler      | Ebbutt
+ Huntley     | Giabucci
+ Michel      | Cogman
+ Bartholomew | Mecco
+ Donelle     | Lambin
 ```
 
 ### Editing tables
@@ -390,4 +401,44 @@ Calculate the average value of the elements of the `age` column:
 
 ```sql
 SELECT AVG(age) FROM clients;
+```
+
+### Grouping
+
+Group the data from the table `clients` by column `gender` and output in the column `total` the total number of elements for each value of `gender`:
+
+```sql
+SELECT gender, COUNT(gender) AS total FROM clients GROUP BY gender;
+```
+
+> Instead of the name of the column on which the grouping, you can specify its sequence number in the `SELECT` statement:
+
+```sql
+SELECT gender, COUNT(gender) AS total FROM clients GROUP BY 1; # Similar to the query above
+```
+
+```sh
+   gender    | total
+-------------+-------
+ Male        |   368
+ Female      |   245
+```
+
+Group the data from the table `clients` by column `gender` and then by column `age`, display for each resulting element the average value of the column `balance` and sort everything in ascending order by column `age`:
+
+```sql
+SELECT gender, age, AVG(balance) AS avg_money FROM clients GROUP BY gender, age ORDER BY age;
+```
+
+```sh
+   gender    | age |       avg_money
+-------------+-----+------------------------
+ Male        |  18 |     31699.250000000000
+ Female      |  18 |     21025.000000000000
+ Male        |  19 |     16963.166666666667
+ Female      |  19 |     25118.400000000000
+ Male        |  20 |     23203.500000000000
+ Female      |  20 |     22956.875000000000
+ Male        |  21 |     19032.400000000000
+ Female      |  21 |     27047.800000000000
 ```
